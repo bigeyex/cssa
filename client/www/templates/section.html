@@ -1,0 +1,33 @@
+<ion-view title="{{section.name}}">
+    <ion-content class="has-header large-list has-footer">
+      <div class="list">
+        <ion-refresher
+          pulling-text="Pull to refresh..."
+          on-refresh="refresh()">
+        </ion-refresher>
+
+        <div ng-repeat="post in posts">
+            <a class="item" href="#/post/{{post.id}}">
+              <span class="item-note">
+                {{post.from_now}}
+              <i class="icon ion-ios7-arrow-right stable-light"></i>
+              </span>
+              <h2>{{post.title}}</h2>
+              <p>{{post.content}}</p>
+            </a>
+        </div>
+
+    </div>
+  </ion-content>
+<div class="bar bar-footer">
+    <button class="button button-clear" ng-click="compose()" ng-if="is_signedin">
+      <i class="icon ion-ios7-bell-outline positive"></i>
+    </button>
+    <div class="update-note title">Updated 3 min ago</div>
+    <button class="button button-clear" ng-click="compose()" ng-if="is_signedin">
+      <i class="icon ion-ios7-compose-outline positive"></i>
+    </button>
+  </div>
+</ion-view>
+
+

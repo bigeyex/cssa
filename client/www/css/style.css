@@ -1,0 +1,32 @@
+/* Empty. Add your own CSS if you like */
+.stable-light{
+	color: #ccc;
+}
+.bar-footer{
+	border-top: 1px solid #ccc;
+}
+.bar .title.update-note{
+	font-size: 14px;
+}
+
+.item p{
+	margin-bottom:0;
+}
+
+.large-list a.item{
+	padding-top:10px;
+	padding-bottom: 10px;
+}
+
+.bar-footer .col{
+	padding: 0;
+}
+
+div.content{
+	padding: 15px;
+}
+
+.image-display .scroll{
+	width: 100%;
+	height: 100%;
+}

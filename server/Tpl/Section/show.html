@@ -1,0 +1,116 @@
+<extend name="layout:admin"/>
+
+<block name="header">Welcome to CSSA</block>
+
+<block name="content">
+    <div class="box box-info" id="section-view">
+        <div class="box-header" >
+            <h3 class="box-title">Sections</h3>
+        </div>
+        <div class="box-body">
+            <table class="table">
+                <tbody data-bind="foreach: sections">
+                <tr data-bind="ifnot: in_edit">
+                    <td>
+                        <a class="section-name" data-bind="text: name,attr: {href: '__APP__/Section/view/section_id/'+id}"></a>
+                        <p class="admin-names"></p>
+                    </td>
+                    <td width="200">
+                        <a href="javascript:void(0);" class="btn btn-default btn-xs" data-bind="click: edit">Edit</a>
+                        <a href="javascript:void(0);" class="btn btn-default btn-xs need-confirm" onclick="confirm_button(event)">Delete</a>
+                        <a href="javascript:void(0);" class="btn btn-danger hide btn-xs" data-bind="click: $parent.delete_section">Confirm Delete</a>
+                    </td>
+                </tr>
+                <tr data-bind="if: in_edit" class="editable-rows">
+                    <td>
+                        <p><input type="text" class="form-control input-sm" data-bind="value: name" placeholder="Section Title"></p>
+                        
+                        <p>
+                            <select class="form-control" data-bind="value:anybody_can_post">
+                                <option value="1">Users can post threads</option>
+                                <option value="0">Only managers can post threads</option>
+                            </select>
+                        </p>
+                        <p>
+                            <select class="form-control" data-bind="value:has_events">
+                                <option value="1">Users can post events (for Sign-up)</option>
+                                <option value="0">Only managers can post events</option>
+                            </select>
+                        </p>
+                        <p>
+                            Managers: 
+                            <input type="text" class="form-control input-sm inline" placeholder="Name of managers (seperated by comma)">
+                        </p>
+                        <p>
+                            <a href="javascript:void(0);" class="btn btn-success btn-xs" data-bind="click: save">Save</a>
+                            <a href="javascript:void(0);" class="btn btn-default btn-xs" data-bind="click: $parent.section_discard_change">Cancel</a>
+                        </p>
+                    </td>
+                    <td width="200">
+                        
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div><!-- /.box-body -->
+        <div class="box-footer">
+            <a href="javascript:void(0);" class="btn btn-default btn-sm" data-bind="click: new_section">Add Section</a>
+        </div><!-- /.box-footer-->
+    </div>
+    
+</block>
+
+
+
+
+<block name="styles">
+    <style>
+    .new-project-button{
+                padding: 10px;
+            }
+            .btn, .box-footer .btn, .box-body .btn{
+                margin-right: 5px;
+            }
+            .first.btn, .project-name .btn{
+                margin-left: 5px;
+            }
+            .box-header .form-inline{
+                margin-left: 10px;
+            }
+            .box .box-body{
+                padding-top:0;
+            }
+            .hide{
+                display: none;
+            }
+            .short-input{
+                width: 150px;
+            }
+            .rename-basket-button{
+                margin-top: 10px;
+                margin-left: 10px;
+            }
+            
+            #section-view p{
+                margin-bottom: 4px;
+            }
+            
+            .editable-rows select{
+                width: 500px;
+            }
+            .editable-rows input.inline{
+                width: 420px;
+                display: inline-block;
+                marign-left: 3px;
+            }
+    </style>
+</block>
+
+<block name="scripts">
+    <script>
+        current_sections = {$sections};
+    </script>
+    
+    {:js('knockout-3.1.0')}
+    {:js('section-show')}
+</block>

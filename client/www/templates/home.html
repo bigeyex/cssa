@@ -1,0 +1,49 @@
+<ion-view title="CSSA Mobile">
+    <ion-content class="has-header">
+      <div class="list">
+        <ion-refresher
+          pulling-text="Pull to refresh..."
+          on-refresh="refresh()">
+        </ion-refresher>
+
+        <div ng-repeat="section in sections">
+            <a class="item item-icon-right" href="#/section/{{ section.id }}">
+              {{section.name}}
+               <i class="icon ion-ios7-arrow-right stable-light"></i>
+            </a>
+        </div>
+
+        <div class="item item-divider">
+            Tools
+        </div>
+        <div ng-if="is_signedin">
+          <!-- <a class="item item-icon-left" href="#">
+            <i class="icon ion-ios7-email-outline"></i>
+            Messages
+          </a> -->
+
+          <a class="item item-icon-left" href="#/events/all">
+            <i class="icon ion-ios7-calendar-outline"></i>
+            Upcoming Events
+          </a>
+
+          <a class="item item-icon-left" href="#/events/my">
+            <i class="icon ion-ios7-time-outline"></i>
+            My Events
+          </a>
+
+          <a class="item item-icon-left" href="#" ng-click="logoutConfirm()">
+            <i class="icon ion-ios7-person-outline"></i>
+            Log-Out
+          </a>
+        </div>
+        <div ng-if="!is_signedin">
+          <a class="item item-icon-left" href="#" ng-click="signin_modal.show()">
+            <i class="icon ion-ios7-person-outline"></i>
+            Log-in
+          </a>
+        </div>
+
+    </div>
+  </ion-content>
+</ion-view>

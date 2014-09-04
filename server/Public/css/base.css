@@ -1,0 +1,8 @@
+.loading{
+    text-indent: -9999px;
+    background: url(../img/loading.gif) no-repeat center center;
+}
+
+.lignt{
+    color: #ccc;
+}

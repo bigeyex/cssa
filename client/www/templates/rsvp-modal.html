@@ -1,0 +1,19 @@
+<div class="modal">
+    <ion-header-bar>
+      <button class="button button-clear button-positive" ng-click="rsvp_modal.hide()">Cancel</button>
+      <div class="h1 title" >Sign-up/RSVP</div>
+      <button class="button button-clear button-positive" ng-click="send_rsvp()">Confirm</button>
+    </ion-header-bar>
+    <ion-content>
+      <div class="list">
+        <label class="item item-input item-stacked-label">
+          <span class="input-label">Number of Attendant</span>
+          <input type="text" placeholder="How many people going to the event" ng-model="new_rsvp.slots">
+        </label>
+        <label class="item item-input item-stacked-label">
+          <span class="input-label">Comment</span>
+          <textarea rows="5" ng-model="new_rsvp.comment" placeholder="Optional, but you can leave a comment"></textarea>
+        </label>
+      </div>
+    </ion-content>
+  </div>

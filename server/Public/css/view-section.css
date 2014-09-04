@@ -1,0 +1,113 @@
+.new-project-button{
+    padding: 10px;
+}
+.btn, .box-footer .btn, .box-body .btn{
+    margin-right: 5px;
+}
+.first.btn, .project-name .btn{
+    margin-left: 5px;
+}
+.box-header .form-inline{
+    margin-left: 10px;
+}
+.box .box-body{
+    padding-top:0;
+}
+.hide{
+    display: none;
+}
+.short-input{
+    width: 150px;
+}
+.rename-basket-button{
+    margin-top: 10px;
+    margin-left: 10px;
+}
+.new-thread-button{
+    margin-bottom: 10px;
+}
+
+.input-group-addon-np{
+    display: table-cell;
+
+}
+
+
+.comment-form{
+    margin-top: 10px;
+}
+
+.comment-form h3, .signup-form h3{
+    font-size: 18px;
+}
+
+.comment-form .form-group{
+    margin-bottom: 5px;
+}
+
+.lightbox-image-link{
+    display: inline-block;
+    position: relative;
+    padding: 0;
+    margin: 0 0.5rem 1rem 0.5rem;
+    background-color: #fff;
+    line-height: 0;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    -ms-border-radius: 6px;
+    -o-border-radius: 6px;
+    border-radius: 6px;
+    -webkit-transition: background-color 0.5s ease-out;
+    -moz-transition: background-color 0.5s ease-out;
+    -o-transition: background-color 0.5s ease-out;
+    transition: background-color 0.5s ease-out;
+}
+
+.lightbox-image{
+    width: 7rem;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+    border-radius: 5px;
+}
+
+.lightbox-closebutton{
+    position: absolute;
+    right: 6px;
+    top: 6px;
+    background:url(../img/close2.png) no-repeat;
+    width: 16px;
+    height: 16px;
+    display: block;
+}
+
+.timeline-body .lightbox-image-link{
+    margin-top: 15px;
+}
+
+.comment-list{
+    padding: 0;
+}
+
+.comment-list .username{
+    color: #999;
+}
+
+.comment-list .date{
+    color: #ccc;
+}
+
+.comment-list li{
+    list-style: none;
+    border-top: 1px solid #ccc;
+    padding-top: 5px;
+}
+
+.timeline-body .comment-list .lightbox-image-link{
+    margin-top: 0;
+}
+
+#new-thread-modal form{
+    padding: 10px;
+}

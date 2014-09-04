@@ -1,0 +1,34 @@
+<div class="modal">
+    <ion-header-bar>
+      <button class="button button-clear button-positive" ng-click="compose_modal.hide()">Cancel</button>
+      <div class="h1 title" ng-if="new_post.id===undefined">New Thread</div>
+      <div class="h1 title" ng-if="new_post.id!==undefined">Edit Thread</div>
+      <button class="button button-clear button-positive" ng-click="publish_post()">Publish</button>
+    </ion-header-bar>
+    <ion-content>
+      <div class="list">
+        <label class="item item-input item-stacked-label">
+          <span class="input-label">Title</span>
+          <input type="text" placeholder="" ng-model="new_post.title">
+        </label>
+        <label class="item item-input item-stacked-label">
+          <span class="input-label">Content</span>
+          <textarea rows="5" ng-model="new_post.content"></textarea>
+        </label>
+        <li class="item item-toggle">
+           This is an event
+           <label class="toggle">
+             <input type="checkbox" ng-model="new_post.is_event">
+             <div class="track">
+               <div class="handle"></div>
+             </div>
+           </label>
+        </li>
+        <label class="item item-input item-stacked-label">
+          <span class="input-label">Event date</span>
+          <input type="date" placeholder="" ng-model="new_post.event_time">
+        </label>
+
+      </div>
+    </ion-content>
+  </div>

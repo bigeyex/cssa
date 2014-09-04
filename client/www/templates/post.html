@@ -1,0 +1,49 @@
+<ion-view title="{{post.title}}">
+    <ion-content class="has-header large-list has-footer">
+    <div class="item">
+        <h2>{{post.title}}</h2>
+        
+        <p><a href="#">{{post.user_name}}</a></p>
+    </div>
+    <div class="content" ng-bind-html="htmlSafe">
+    </div>
+    <ul class="comments list">
+      <li class="item" ng-repeat="comment in post.comments">
+            <span class="item-note">
+              1 min ago
+            </span>
+            <p>{{comment.user_fullname}}</p>
+            <p ng-bind-html="comment.content"></p>
+            
+      </li>
+    </ul>
+
+  </ion-content>
+  <div class="bar bar-footer" ng-if="is_signedin">
+    <div class="col"><button class="button button-clear col" ng-click="compose()">
+        <i class="icon ion-ios7-compose-outline positive"></i>
+      </button></div>
+    <div class="col"><button class="button button-clear col" ng-click="delete_post()">
+        <i class="icon ion-ios7-trash-outline positive"></i>
+      </button></div>
+    <div class="col"><button class="button button-clear col" ng-click="close_post()">
+        <i class="icon ion-ios7-locked-outline positive" ng-if="post.is_closed==0"></i>
+        <i class="icon ion-ios7-locked positive" ng-if="post.is_closed==1"></i>
+      </button></div>
+    <div class="col">
+      <button class="button button-clear col" ng-click="rsvp()" ng-if="post.rsvped==0">
+        <i class="icon ion-ios7-checkmark-outline positive"></i>
+      </button>
+      <button class="button button-clear col" ng-click="clear_rsvp()" ng-if="post.rsvped==1">
+        <i class="icon ion-ios7-checkmark positive"></i>
+      </button>
+    </div>
+    <div class="col"><button class="button button-clear col" ng-click="reply()">
+        <i class="icon ion-ios7-undo-outline positive"></i>
+      </button></div> 
+    
+    
+  </div>
+</ion-view>
+
+

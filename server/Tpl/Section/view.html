@@ -1,0 +1,189 @@
+<extend name="layout:admin"/>
+
+<block name="header">{$section_name}</block>
+
+<block name="content">
+    
+    <div class="row">    
+<!--
+        <div class="col-md-12">
+             <a class="btn btn-default new-thread-button" href="javascript:void(0);">New Thread</a>
+        </div>      
+-->
+        <div class="modal fade" id="new-thread-modal">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title post-thread-title">Post New Thread</h4>
+              </div>
+                <!-- form start -->
+                <form role="form" action="{:U('Post/add')}" method="post">
+                    <input type="hidden" name="section_id" id="section_id" value="{$_GET.section_id}"/>
+                    <input type="hidden" name="post_id" id="post_id" value=""/>
+                    <div class="box-body">
+                        <div class="form-group">
+                            <input type="text" name="title" class="form-control" id="post-title" placeholder="Title">
+                        </div>
+                        <div class="form-group">
+                            <textarea class="form-control" name="content" id="post-content" rows="10" placeholder="Content"></textarea>
+                        </div>
+                        <div class="form-group">
+                                <input type="checkbox" id="event-checkbox" value="1" name="is_event"/><label for="event-checkbox">&nbsp; This is an event that requires sign-up</label><label id="input-slots" class="hidden">&nbsp;&nbsp; Number of Slots:<input placeholder="# of slots" name="signup_slots" id="signup_slots"/></label>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group">
+                                
+                                <div class="input-group-addon">
+                                    <i class="fa fa-calendar"></i> Event Date
+                                </div>
+                                <input type="text" name="event_time" class="form-control event-date" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask="" placeholder="The scheduled date of this event"/>
+                            </div><!-- /.input group -->
+                        </div>
+                        <div class="form-group">
+                            <div id="post-photo-list">
+                                
+                            </div>
+                            <span class="btn btn-sm btn-default fileinput-button">
+                                <i class="glyphicon glyphicon-plus"></i>
+                                <span>Add Photo</span>
+                                <!-- The file input field used as target for the file upload widget -->
+                                <input id="fileupload" type="file" name="files" data-url="{:U('Post/upload')}">
+                            </span>
+                        </div>
+                    </div><!-- /.box-body -->
+
+                    <div class="box-footer">
+                        <input type="button" class="btn btn-primary submit-create-post-form" value="Submit">
+                    </div>
+                </form>
+            </div><!-- /.modal-content -->
+          </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->            
+        
+        <div class="col-md-12">
+            <!-- The time line -->
+            
+            <ul class="timeline" id="timeline-view">
+                <!-- timeline time label -->
+                <li class="time-label">
+                <a class="btn btn-default new-thread-button" href="javascript:void(0);">New Thread</a>
+<!--
+                    <span class="bg-red">
+                        10 Feb. 2014
+                    </span>
+-->
+                </li>
+                <!-- /.timeline-label -->
+                <!-- timeline item -->
+                <!-- ko foreach: posts -->
+                <li>
+                    <i class="fa fa-envelope bg-blue"></i>
+                    <div class="timeline-item">
+                        <span class="time"><i class="fa fa-clock-o"></i><span data-bind="text: time"></span></span>
+                        <h3 class="timeline-header" data-bind="text: title"></h3>
+                        <div class="timeline-body">
+                            <div data-bind="html: content, visible: $parent.expand_id()!=id"></div>
+                            <div data-bind="if: $parent.expand_id()==id"><div data-bind="html: $parent.expand_content"></div></div>
+                            
+                            <div class="comment-form" data-bind="if: $parent.comment_id()==id">
+                                <h3>Comments</h3>
+                                <ul class="comment-list" data-bind="foreach: $parent.comments">
+                                    <li>   
+                                        <span class="username" data-bind="text: user_fullname"></span> <span class="date" data-bind="text: publish_time"></span>
+                                        <p data-bind="text: content"></p>
+                                        <div class="comment-photo" data-bind="foreach: image_list">
+                                            <a class="lightbox-image-link comment-uploaded" data-bind="attr: {href: '__APP__/Public/Uploaded/'+ $data}" data-lightbox="comment-uploaded-photos" data-title="Click the right half of the image to move forward."><img class="lightbox-image" data-bind="attr: {src: '__APP__/Public/Uploaded/th150x150_'+$data}" alt=""/>
+                                            </a>
+                                        </div>
+                                    </li>
+                                </ul>
+                                <div class="form-group">
+                                    <textarea class="form-control comment-content" rows="5" placeholder="Add Comment"></textarea>
+                                </div>
+                                <div class="comment-photo-list"></div>
+                                <button class="btn btn-sm btn-primary post-comment-button">Post Comment</button>
+                                <span class="btn btn-sm btn-default fileinput-button">
+                                    <i class="glyphicon glyphicon-plus"></i>
+                                    <span>Add Photo</span>
+                                    <!-- The file input field used as target for the file upload widget -->
+                                    <input class="fileupload2" type="file" name="files" data-url="{:U('Post/upload')}">
+                                </span>
+                            </div>
+                            <div class="signup-form" data-bind="if: $parent.signup_id()==id">
+                                <h3>Sign-up this event</h3>
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">Number of attendant</span>
+                                        <input type="text" name="slots" class="form-control signup-number-of-slots" placeholder="Number of people coming">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <textarea class="form-control signup-comment-content" rows="4" placeholder="Add Comment"></textarea>
+                                </div>
+                                
+                                <button class="btn btn-sm btn-primary confirm-signup-button">Confirm Sign-up</button>
+                            </div>
+                        </div>
+                        
+                        <div class="timeline-footer">
+                            <a class="btn btn-default btn-xs" data-bind="click: $parent.load_more, visible: $parent.expand_id()!=id">Read more</a>
+                            <a class="btn btn-default btn-xs" data-bind="click: $parent.view_comments, visible: $parent.comment_id()!=id">Comments (<span data-bind="text: comment_count"></span>)</a>
+                            <a class="btn btn-default btn-xs" data-bind="visible: is_event()==1&&signed_up()==0,click: $parent.signup">Sign-up this event</a>
+                            <span data-bind="visible: (is_event()==1&&signed_up()==1)">
+                                <a class="btn btn-default btn-xs btn-warning"  onclick="confirm_button(event)">Cancel Sign-up</a>
+                                <a href="javascript:void(0);" class="btn btn-danger hide btn-xs" data-bind="click: $parent.cancel_signup">Confirm Cancel Sign-up</a>
+                            </span>
+                            <span data-bind="visible: (can_edit==1&&is_closed()==0)">
+                            <a class="btn btn-default btn-xs"  onclick="confirm_button(event)">Close/Resolved</a>
+                            <a href="javascript:void(0);" class="btn btn-danger hide btn-xs" data-bind="click: close">Confirm Close</a>
+                            </span>
+                            <a class="btn btn-default btn-xs btn-info" data-bind=" visible: (can_edit==1&&is_closed()==1), click:close" >Reopen</a>
+                            <a class="btn btn-default btn-xs" data-bind="visible: can_edit==1, click: edit">Edit</a>
+                            <a class="btn btn-default btn-xs" data-bind=" visible: can_edit==1" onclick="confirm_button(event)">Delete</a>
+                            <a href="javascript:void(0);" class="btn btn-danger hide btn-xs" data-bind="click: $parent.delete_post">Confirm Delete</a>
+                            
+                        </div>
+                    </div>
+                </li>
+                <!-- /ko -->
+                <!-- END timeline item -->
+                <li>
+                    <i class="fa fa-clock-o"></i>
+                </li>
+            </ul>
+        </div><!-- /.col -->
+    </div> <!-- row -->
+</block>
+
+
+
+<block name="scripts">
+    {:js('knockout-3.1.0')}
+    {:js('bootstrap-datepicker')}
+    {:js('icheck.min')}
+    {:js('jquery.ui.widget')}
+    {:js('jquery.iframe-transport')}
+    {:js('jquery.fileupload')}
+    {:js('lightbox')}
+    <script>
+    app_path = '__APP__';
+     
+    var posts = {:json_encode($posts)};
+     
+    
+    </script>
+    {:js('view-control')}
+</block>
+
+
+<block name="styles">
+    {:css('datepicker')}
+    {:css('jquery.fileupload')}
+    {:css('icheck-flat/blue')}
+    {:css('lightbox')}
+    {:css('view-section')}
+    <style>
+    
+    </style>
+</block>
